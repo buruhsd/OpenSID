@@ -1,23 +1,28 @@
 <script>
-$(function(){
-var nik = {};
-nik.results = [
-<?php foreach($penduduk as $data){?>
-{id:'<?php echo $data['id']?>',name:"<?php echo $data['nik']." - ".($data['nama'])?>",info:"<?php echo ($data['alamat'])?>"},
-<?php }?>
-];
+	function get_alasan(alasan){
+		if(alasan == 7){
+			$('#sebut_alasan').show();
+		} else { $('#sebut_alasan').hide(); }
+	}
 
-$('#nik').flexbox(nik, {
-resultTemplate: '<div><label>No nik : </label>{name}</div><div>{info}</div>',
-watermark: <?php if($individu){?>'<?php echo $individu['nik']?> - <?php echo spaceunpenetration($individu['nama'])?>'<?php }else{?>'Ketik no nik di sini..'<?php }?>,
-width: 260,
-noResultsText :'Tidak ada no nik yang sesuai..',
-onSelect: function() {
-$('#'+'main').submit();
-}
-});
+	$(function(){
+		var nik = {};
+		nik.results = [
+			<?php foreach($penduduk as $data){?>
+				{id:'<?php echo $data['id']?>',name:"<?php echo $data['nik']." - ".($data['nama'])?>",info:"<?php echo ($data['alamat'])?>"},
+			<?php }?>
+		];
 
-});
+		$('#nik').flexbox(nik, {
+			resultTemplate: '<div><label>No nik : </label>{name}</div><div>{info}</div>',
+			watermark: <?php if($individu){?>'<?php echo $individu['nik']?> - <?php echo spaceunpenetration($individu['nama'])?>'<?php }else{?>'Ketik no nik di sini..'<?php }?>,
+			width: 260,
+			noResultsText :'Tidak ada no nik yang sesuai..',
+			onSelect: function() {
+				$('#'+'main').submit();
+			}
+		});
+	});
 </script>
 
 
@@ -54,7 +59,7 @@ table.form.detail td{
 			<table>
 				<tr>
 					<th width="80">NIK / Nama</th>
-					<td>
+					<td width="350">
 						<form action="" id="main" name="main" method="POST">
 							<div id="nik" name="nik"></div>
 						</form>
@@ -80,18 +85,21 @@ table.form.detail td{
 	<tr>
 		<th>Nomor Surat</th>
 		<td>
-			<input name="nomor" type="text" class="inputbox required" size="12"/>
+			<input name="nomor" type="text" class="inputbox required" size="20"/>
 		</td>
 	</tr>
 	<tr>
 	  <th>Alasan Pindah</th>
 	  <td>
-	    <select name="alasan_pindah_id" class="required">
+	    <select name="alasan_pindah_id" class="required" onchange=get_alasan(this.value)>
 	      <option value="">Pilih Alasan Pindah</option>
 	      <?php foreach($kode['alasan_pindah'] as $key => $value){?>
 	        <option value="<?php echo $key?>"><?php echo strtoupper($value)?></option>
 	      <?php }?>
 	    </select>
+	    <span id="sebut_alasan" style="display:none; margin-left: 10px">
+				Sebut alasan: <input name="sebut_alasan" type="text" class="inputbox" size="40"/>
+			</span>
 	  </td>
 	</tr>
 	<tr>
@@ -109,19 +117,11 @@ table.form.detail td{
 				<tr>
 					<th>RT</th>
 					<td>
-						<input name="rt_tujuan" type="text" class="inputbox required" size="40"/>
-					</td>
-				</tr>
-				<tr>
-					<th>RW</th>
-					<td>
-						<input name="rw_tujuan" type="text" class="inputbox required" size="40"/>
-					</td>
-				</tr>
-				<tr>
-					<th><?php echo ucwords(config_item('sebutan_dusun'))?></th>
-					<td>
-						<input name="dusun_tujuan" type="text" class="inputbox required" size="40"/>
+						<input name="rt_tujuan" type="text" class="inputbox required" size="10"/>
+					<strong style="margin-left: 10px; margin-right: 10px">RW</strong>
+						<input name="rw_tujuan" type="text" class="inputbox required" size="10"/>
+					<strong style="margin-left: 10px; margin-right: 10px"><?php echo ucwords(config_item('sebutan_dusun'))?></strong>
+						<input name="dusun_tujuan" type="text" class="inputbox required" size="20"/>
 					</td>
 				</tr>
 				<tr>
@@ -205,7 +205,7 @@ table.form.detail td{
 			<tr>
 				<th>Jumlah Pengikut</th>
 				<td>
-					<input name="jml_pengikut" type="text" class="inputbox required" size="40"/>
+					<input name="jml_pengikut" type="text" class="inputbox required" size="10"/>
 				</td>
 			</tr>
 
@@ -220,11 +220,11 @@ table.form.detail td{
 									<th>No</th>
 									<th><input type="checkbox" class="checkall"/></th>
 									<th align="left" width='70'>NIK</th>
+									<th width="100" align="left" >KTP Berlaku S/D</th>
 									<th align="left" width='100'>Nama</th>
-									<th align="left" width='30' align="center">JK</th>
+									<th align="left" width='30' align="center">Jenis Kelamin</th>
 									<th width="70" align="left" >Umur</th>
 									<th width="70" align="left" >Status Kawin</th>
-									<th width="100" align="left" >Pendidikan</th>
 								</tr>
 							</thead>
 
@@ -238,11 +238,13 @@ table.form.detail td{
 												<input type="checkbox" name="id_cb[]" value="'<?php echo $data['nik']?>'" />
 											</td>
 											<td><?php echo $data['nik']?></td>
+											<td>
+												<input name="ktp_berlaku[]" type="text" class="inputbox datepicker" size="20"/>
+											</td>
 											<td><?php echo unpenetration($data['nama'])?></td>
 											<td><?php echo $data['sex']?></td>
 											<td><?php echo $data['umur']?></td>
 											<td><?php echo $data['status_kawin']?></td>
-											<td><?php echo $data['pendidikan']?></td>
 									</tr>
 									<?php }?>
 								<?php }?>
@@ -262,7 +264,7 @@ table.form.detail td{
 			<tr>
 				<th>Keterangan</th>
 				<td>
-					<input name="keterangan" type="text" class="inputbox required" size="20"/>
+					<input name="keterangan" type="text" class="inputbox required" size="40"/>
 				</td>
 			</tr>
 
@@ -286,6 +288,7 @@ table.form.detail td{
 <option ><?php echo unpenetration($data['jabatan'])?></option>
 <?php }?>
 </select>
+<br><br>
 </td>
 </tr>
 </table>
