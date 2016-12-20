@@ -163,134 +163,120 @@ table.form.detail td{
 			</table>
 		</td>
 	</tr>
-
-
-<tr>
-  <th>Jenis Kepindahan</th>
-  <td>
-    <select name="jenis_kepindahan_id" class="required">
-      <option value="">Pilih Jenis Kepindahan</option>
-      <?php foreach($kode['jenis_kepindahan'] as $key => $value){?>
-        <option value="<?php echo $key?>"><?php echo strtoupper($value)?></option>
-      <?php }?>
-    </select>
-  </td>
-</tr>
-
-
-<tr>
-  <th>Status KK Bagi Yang Tidak Pindah</th>
-  <td>
-    <select name="status_kk_tidak_pindah_id" class="required">
-      <option value="">Pilih Status KK Tidak Pindah</option>
-      <?php foreach($kode['status_kk_pindah'] as $key => $value){?>
-        <option value="<?php echo $key?>"><?php echo strtoupper($value)?></option>
-      <?php }?>
-    </select>
-  </td>
-</tr>
-
-<tr>
-  <th>Status KK Bagi Yang Pindah</th>
-  <td>
-    <select name="status_kk_pindah_id" class="required">
-      <option value="">Pilih Status KK Pindah</option>
-      <?php foreach($kode['status_kk_pindah'] as $key => $value){?>
-        <option value="<?php echo $key?>"><?php echo strtoupper($value)?></option>
-      <?php }?>
-    </select>
-  </td>
-</tr>
-
-			<tr>
-				<th>Jumlah Pengikut</th>
-				<td>
-					<input name="jml_pengikut" type="text" class="inputbox required" size="10"/>
-				</td>
-			</tr>
-
-
-			<tr>
-				<th colspan="1">Pengikut</th>
-				<td colspan="1">
-					<div style="margin-left:0px;">
-						<table class="list">
-							<thead>
-								<tr>
-									<th>No</th>
-									<th><input type="checkbox" class="checkall"/></th>
-									<th align="left" width='70'>NIK</th>
-									<th width="100" align="left" >KTP Berlaku S/D</th>
-									<th align="left" width='100'>Nama</th>
-									<th align="left" width='30' align="center">Jenis Kelamin</th>
-									<th width="70" align="left" >Umur</th>
-									<th width="70" align="left" >Status Kawin</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<?php if($anggota!=NULL){
-									$i=0;?>
-									<?php  foreach($anggota AS $data){ $i++;?>
-										<tr>
-					            <td align="center" width="2"><?php echo $i?></td>
-											<td align="center" width="5">
-												<input type="checkbox" name="id_cb[]" value="'<?php echo $data['nik']?>'" />
-											</td>
-											<td><?php echo $data['nik']?></td>
-											<td>
-												<input name="ktp_berlaku[]" type="text" class="inputbox datepicker" size="20"/>
-											</td>
-											<td><?php echo unpenetration($data['nama'])?></td>
-											<td><?php echo $data['sex']?></td>
-											<td><?php echo $data['umur']?></td>
-											<td><?php echo $data['status_kawin']?></td>
-									</tr>
-									<?php }?>
-								<?php }?>
-							</tbody>
-						</table>
-					</div>
-				</td>
-			</tr>
-
-
-			<tr>
-				<th>Berlaku</th>
-				<td>
-					<input name="awal" type="text" class="inputbox required datepicker" size="20"/>
-				</td>
-			</tr>
-			<tr>
-				<th>Keterangan</th>
-				<td>
-					<input name="keterangan" type="text" class="inputbox required" size="40"/>
-				</td>
-			</tr>
+	<tr>
+	  <th>Jenis Kepindahan</th>
+	  <td>
+	    <select name="jenis_kepindahan_id" class="required">
+	      <option value="">Pilih Jenis Kepindahan</option>
+	      <?php foreach($kode['jenis_kepindahan'] as $key => $value){?>
+	        <option value="<?php echo $key?>"><?php echo strtoupper($value)?></option>
+	      <?php }?>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <th>Status KK Bagi Yang Tidak Pindah</th>
+	  <td>
+	    <select name="status_kk_tidak_pindah_id" class="required">
+	      <option value="">Pilih Status KK Tidak Pindah</option>
+	      <?php foreach($kode['status_kk_pindah'] as $key => $value){?>
+	        <option value="<?php echo $key?>"><?php echo strtoupper($value)?></option>
+	      <?php }?>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <th>Status KK Bagi Yang Pindah</th>
+	  <td>
+	    <select name="status_kk_pindah_id" class="required">
+	      <option value="">Pilih Status KK Pindah</option>
+	      <?php foreach($kode['status_kk_pindah'] as $key => $value){?>
+	        <option value="<?php echo $key?>"><?php echo strtoupper($value)?></option>
+	      <?php }?>
+	    </select>
+	  </td>
+	</tr>
 
 	<tr>
-<th>Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></th>
-<td>
-<select name="pamong"  class="inputbox required" >
-<option value="">Pilih Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></option>
-<?php foreach($pamong AS $data){?>
-<option value="<?php echo $data['pamong_nama']?>"><font style="bold"><?php echo unpenetration($data['pamong_nama'])?></font> (<?php echo unpenetration($data['jabatan'])?>)</option>
-<?php }?>
-</select>
-</td>
-</tr>
-<tr>
-<th>Sebagai</th>
-<td>
-<select name="jabatan"  class="inputbox required">
-<option value="">Pilih Jabatan</option>
-<?php foreach($pamong AS $data){?>
-<option ><?php echo unpenetration($data['jabatan'])?></option>
-<?php }?>
-</select>
-<br><br>
-</td>
-</tr>
+		<th colspan="1">Pengikut</th>
+		<td colspan="1">
+			<div style="margin-left:0px;">
+				<table class="list">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th><input type="checkbox" class="checkall"/></th>
+							<th align="left" width='70'>NIK</th>
+							<th width="100" align="left" >KTP Berlaku S/D</th>
+							<th align="left" width='100'>Nama</th>
+							<th align="left" width='30' align="center">Jenis Kelamin</th>
+							<th width="70" align="left" >Umur</th>
+							<th width="70" align="left" >Status Kawin</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<?php if($anggota!=NULL){
+							$i=0;?>
+							<?php  foreach($anggota AS $data){ $i++;?>
+								<tr>
+			            <td align="center" width="2"><?php echo $i?></td>
+									<td align="center" width="5">
+										<input type="checkbox" name="id_cb[]" value="'<?php echo $data['nik']?>'" />
+									</td>
+									<td><?php echo $data['nik']?></td>
+									<td>
+										<input name="ktp_berlaku[]" type="text" class="inputbox datepicker" size="20"/>
+									</td>
+									<td><?php echo unpenetration($data['nama'])?></td>
+									<td><?php echo $data['sex']?></td>
+									<td><?php echo $data['umur']?></td>
+									<td><?php echo $data['status_kawin']?></td>
+							</tr>
+							<?php }?>
+						<?php }?>
+					</tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+
+	<tr>
+		<th>Tanggal Pindah</th>
+		<td>
+			<input name="tanggal_pindah" type="text" class="inputbox required datepicker" size="20"/>
+		</td>
+	</tr>
+	<tr>
+		<th>Keterangan</th>
+		<td>
+			<input name="keterangan" type="text" class="inputbox required" size="40"/>
+		</td>
+	</tr>
+
+	<tr>
+		<th>Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></th>
+		<td>
+			<select name="pamong"  class="inputbox required" >
+				<option value="">Pilih Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></option>
+				<?php foreach($pamong AS $data){?>
+				<option value="<?php echo $data['pamong_nama']?>"><font style="bold"><?php echo unpenetration($data['pamong_nama'])?></font> (<?php echo unpenetration($data['jabatan'])?>)</option>
+				<?php }?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>Sebagai</th>
+		<td>
+			<select name="jabatan"  class="inputbox required">
+				<option value="">Pilih Jabatan</option>
+				<?php foreach($pamong AS $data){?>
+				<option ><?php echo unpenetration($data['jabatan'])?></option>
+				<?php }?>
+			</select>
+			<br><br>
+		</td>
+	</tr>
 </table>
 
 </div>

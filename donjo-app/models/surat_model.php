@@ -415,6 +415,7 @@
 		// Proses surat yang membutuhkan pengambilan data khusus
 		switch ($url) {
 			case 'surat_ket_pindah_penduduk':
+				$buffer=str_replace("[jumlah_pengikut]",count($input['id_cb']),$buffer);
 				for ($i = 0; $i < MAX_PINDAH; $i++) {
 					$nomor = $i+1;
 					if ($i < count($input['id_cb'])) {
@@ -629,6 +630,7 @@
 
 			//DATA DARI KONFIGURASI DESA
 			$buffer=$this->case_replace("[sebutan_desa]",config_item('sebutan_desa'),$buffer);
+			$buffer=$this->case_replace("[sebutan_dusun]",config_item('sebutan_dusun'),$buffer);
 			$buffer=str_replace("[kode_desa]","$config[kode_desa]",$buffer);
 			$buffer=str_replace("[kode_kecamatan]","$config[kode_kecamatan]",$buffer);
 			$buffer=str_replace("[kode_kabupaten]","$config[kode_kabupaten]",$buffer);
@@ -710,7 +712,8 @@
 				"tanggal_lahir", "tanggallahir_istri", "tanggallahir_suami", "tanggal_mati",
 				"tanggallahir_pasangan", "tgl_lahir_ayah", "tgl_lahir_ibu", "tgl_berakhir_paspor",
 				"tgl_akte_perkawinan", "tgl_perceraian", "tanggallahir","tanggallahir_pelapor", "tgl_lahir",
-				"tanggallahir_ayah", "tanggallahir_ibu", "tgl_lahir_wali", "tgl_nikah", "ktp_berlaku"
+				"tanggallahir_ayah", "tanggallahir_ibu", "tgl_lahir_wali", "tgl_nikah", "ktp_berlaku",
+				"tanggal_pindah"
 				);
 			foreach ($input as $key => $entry){
 				// Isian tanggal diganti dengan format tanggal standar
