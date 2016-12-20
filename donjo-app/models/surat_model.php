@@ -424,7 +424,6 @@
 						$buffer=str_replace("[pindah_no_$nomor]",$nomor,$buffer);
 						$buffer=str_replace("[pindah_nik_$nomor]",$penduduk['nik'],$buffer);
 						$buffer=str_replace("[pindah_nama_$nomor]",ucwords(strtolower($penduduk['nama'])),$buffer);
-						$buffer=str_replace("[ktp_berlaku_$nomor]",$input['ktp_berlaku'][$i],$buffer);
 						$buffer=str_replace("[pindah_shdk_$nomor]",ucwords(strtolower($penduduk['hubungan'])),$buffer);
 					} else {
 						$buffer=str_replace("[pindah_no_$nomor]","",$buffer);
@@ -719,9 +718,8 @@
 				// Isian tanggal diganti dengan format tanggal standar
 				if (in_array($key, $isian_tanggal)){
 					if (is_array($entry)) {
-						for ($i=1; $i<count($entry); $i++){
+						for ($i=1; $i<=count($entry); $i++){
 							$str = $key.$i;
-							// $buffer=preg_replace("/\[ktp_berlaku1\]|\[form_$str\]/",tgl_indo_dari_str($entry[$i-1]),$buffer);
 							$buffer=preg_replace("/\[$str\]|\[form_$str\]/",tgl_indo_dari_str($entry[$i-1]),$buffer);
 						}
 					} else {

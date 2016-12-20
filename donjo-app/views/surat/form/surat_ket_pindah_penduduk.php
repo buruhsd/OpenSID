@@ -222,11 +222,11 @@ table.form.detail td{
 								<tr>
 			            <td align="center" width="2"><?php echo $i?></td>
 									<td align="center" width="5">
-										<input type="checkbox" name="id_cb[]" value="'<?php echo $data['nik']?>'" />
+										<input type="checkbox" name="id_cb[]" value="'<?php echo $data['nik']?>'" onchange="if ($(this).is(':unchecked')){$('#ktp_berlaku<?php echo ($i)?>').attr('disabled', 'disabled');} else {$('#ktp_berlaku<?php echo ($i)?>').removeAttr('disabled');}"/>
 									</td>
 									<td><?php echo $data['nik']?></td>
 									<td>
-										<input name="ktp_berlaku[]" type="text" class="inputbox datepicker" size="20"/>
+										<input id="ktp_berlaku<?php echo ($i)?>" disabled="disabled" name="ktp_berlaku[]" type="text" class="inputbox datepicker" size="20"/>
 									</td>
 									<td><?php echo unpenetration($data['nama'])?></td>
 									<td><?php echo $data['sex']?></td>
