@@ -209,6 +209,25 @@ define("KODE_PEKERJAAN", serialize(array(
   }
 
 /**
+ * SuratCetakDesa
+ *
+ * Mengembalikan path surat ubahan desa apabila ada
+ *
+ * @access  public
+ * @return  string
+ */
+  function SuratCetakDesa($nama_surat)
+  {
+    $surat_cetak_desa = LOKASI_SURAT_PRINT_DESA . "print_" . $nama_surat . ".php";
+    if(is_file($surat_cetak_desa)){
+      return $surat_cetak_desa;
+    } else {
+      return "";
+    }
+
+  }
+
+/**
  * SuratExport
  *
  * Mengembalikan path surat export apabila ada, dengan prioritas:
@@ -224,6 +243,27 @@ define("KODE_PEKERJAAN", serialize(array(
       return SuratExportDesa($nama_surat);
     } elseif(is_file("surat/$nama_surat/$nama_surat.rtf")) {
       return "surat/$nama_surat/$nama_surat.rtf";
+    } else {
+      return "";
+    }
+  }
+
+/**
+ * SuratCetak
+ *
+ * Mengembalikan path surat cetak apabila ada, dengan prioritas:
+ *    1. surat export ubahan desa
+ *    2. surat export asli SID
+ *
+ * @access  public
+ * @return  string
+ */
+  function SuratCetak($nama_surat)
+  {
+    if(SuratCetakDesa($nama_surat) != ""){
+      return SuratCetakDesa($nama_surat);
+    } elseif(is_file("surat/print/print_".$nama_surat.".php")) {
+      return "surat/print/print_".$nama_surat.".php";
     } else {
       return "";
     }
