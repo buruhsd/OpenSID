@@ -76,7 +76,7 @@ table.form.detail td{
 				<tr>
 					<th>Telepon</th>
 					<td>
-						<input name="telepon" type="text" class="inputbox required" size="12"/>
+						<input name="telepon" type="text" class="inputbox required" size="20"/>
 					</td>
 				</tr>
 			</table>
